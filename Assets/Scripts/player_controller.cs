@@ -19,6 +19,7 @@ public class player_controller : MonoBehaviour
     private float rotateX; //set yaw
     private float rotateY; //set pitch
 
+    public float gravScale; //set scale of gravity inflicted on Player
     public float jumpForce; //set power of jump
     public float distCheck; //how close character is to ground
     private bool isGrounded; //determines if player on the ground
@@ -39,6 +40,8 @@ public class player_controller : MonoBehaviour
         rotateX = 0.0f;
         rotateY = 0.0f;
 
+//        jump = new Vector3(0.0f, 2.0f, 0.0f);
+
         SetAmmoText();
         fireText.text = "";
     }
@@ -49,21 +52,27 @@ public class player_controller : MonoBehaviour
         // Move Player
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
-        float moveY = 0.0f; // Check if player on ground, if so allow for jump, else they fall down
+        //        float moveY = rb.velocity.y;
+        rb.AddForce(Physics.gravity * (gravScale - 1) * rb.mass);
+
+        // Check if player on ground, if so allow for jump, else they fall down
         if (Physics.Raycast(transform.position, Vector3.down, distCheck))
         {
             isGrounded = true;
+            rb.drag = 1;
         } else {
             isGrounded = false;
+            rb.drag = 0;
         }
         if (isGrounded && Input.GetKey("space"))
         {
-            moveY = jumpForce;
-        } else {
+            //            moveY = jumpForce;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        } /* else {
             moveY = -0.375f;
-        }
-        Vector3 movement = new Vector3(moveX, moveY, moveZ) * speed;
-        rb.velocity = transform.TransformDirection(movement);
+        } */ 
+        Vector3 movement = new Vector3(moveX, 0.0f, moveZ) * speed;
+        rb.AddForce(transform.TransformDirection(movement));
 
         // Rotate Player
         if ((-90 <= rotateX) && (rotateX <= 90))

@@ -10,7 +10,7 @@ This project is a passion project and serves as game development and design prac
 
 ## Deployment
 
-To deploy this project, either run DOOMOUT.exe from the Builds folder, or add the entire project to the Unity Hub and open and run from the Unity editor. Currently built on Unity 2021.3.11f1.
+To deploy this project, add the project to the Unity Hub and build/run from the Unity editor. Currently built on Unity 2021.3.15f1.
 
 
 ## Sources

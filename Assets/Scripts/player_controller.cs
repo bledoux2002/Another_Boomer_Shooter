@@ -130,6 +130,7 @@ public class player_controller : MonoBehaviour
             Cursor.visible = isPaused;
         }
 
+// Old player controller scripting, before adding Character Controller Component. Can be removed but keeping temporarily to study for future reference
 /*        // Move Player
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");

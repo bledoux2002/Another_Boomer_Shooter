@@ -115,6 +115,7 @@ public class player_controller : MonoBehaviour
         }
 
         // Pause Menu
+        //possibly a way to store current movement values/velocity to reapply after pause? prevents player form dropping open resume
         if (Input.GetKeyDown("p")) //change to 'escape', doesn't work in editor
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);

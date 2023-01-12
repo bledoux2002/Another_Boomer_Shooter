@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,8 @@ public class player_controller : MonoBehaviour
 //    public float rateOfFire; //hold rate of fire in sec for weapon
     public Text ammoText; //display # of ammo in inventory
     public Text fireText; //appears when firing bullet
+    private Vector3 fireTextPos;
+    private System.Random rand;
 
     [HideInInspector]
     public bool canMove = true;
@@ -60,6 +63,8 @@ public class player_controller : MonoBehaviour
 
         SetAmmoText();
         fireText.text = "";
+        fireTextPos = fireText.transform.position;
+        rand = new Random();
     }
 
     // FixedUpdate is called at a fixed interval, independent of frame rate
@@ -217,8 +222,10 @@ public class player_controller : MonoBehaviour
                 {
                     ammoCount--;
                     SetAmmoText();
+                    fireText.transform.position = Vector3(rand.Next(fireTextPos.X - 250, fireTextPos.X + 250), rand.Next(fireTextPos.Y - 100, fireTextPos.Y + 100), 0);
                     fireText.text = "pew"; // available ammo to be shot has been fired
                 } else {
+                    fireText.transform.position = fireTextPos;
                     fireText.text = "click"; // no available ammo to be shot
                 }
                 yield return new WaitForSeconds(1f); // leave effect on screen for 1 sec

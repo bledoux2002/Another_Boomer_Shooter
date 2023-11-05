@@ -3316,6 +3316,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5231421394570834933, guid: 96fdd2631e18ce745b3d22cb31e6e443, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231421394570834933, guid: 96fdd2631e18ce745b3d22cb31e6e443, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d98c301f74d62264b9dc92b53dec4951, type: 2}
     - target: {fileID: 6685834680817355524, guid: 96fdd2631e18ce745b3d22cb31e6e443, type: 3}
       propertyPath: m_Name
       value: DoubleBarrelShotgun

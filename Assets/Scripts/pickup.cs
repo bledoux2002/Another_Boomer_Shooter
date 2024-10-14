@@ -5,9 +5,9 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public PlayerController playerController;
-    public GameObject shotgun; //shotgun prefab for instantiation when picked up
-    public Vector3 shotgunPositionOffset = new Vector3(0, 1.5f, 0.5f);
-    public Vector3 shotgunRotationOffset = new Vector3(-90, 0, 0);
+    public Weapon weapon; //shotgun prefab for instantiation when picked up
+    public Vector3 positionOffset;// = new Vector3(0, 1.5f, 0.5f);
+    public Vector3 rotation;// = new Vector3(-90, 0, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class Pickup : MonoBehaviour
     void Update()
     {
         // Continuously rotate object
-        transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime);
+        transform.Rotate(rotation * Time.deltaTime);
         
         // Object floats up and down
 
@@ -30,21 +30,24 @@ public class Pickup : MonoBehaviour
     {
         switch (gameObject.tag)
         {
-            case "ammo":
-                if (playerController.ammoCount < 100)
+            case "ammo": // have to change depending on ammo type
+                if (weapon.ammoInv < weapon.maxAmmo)
                 {
-                    playerController.UpdateAmmo(10);
+                    weapon.UpdateAmmo(20);
                     gameObject.SetActive(false);
                 }
                 break;
             case "weapon":
-                if (playerController.ammoCount < 100)
+                if (weapon.ammoInv < weapon.maxAmmo)
                 {
-                    playerController.UpdateAmmo(12);
+                    weapon.UpdateAmmo(10);
+                    /*
                     Transform camTransform = playerController.cam.transform;
-                    Vector3 shotgunPosition = camTransform.position + camTransform.TransformDirection(shotgunPositionOffset);
-                    Quaternion shotgunRotation = camTransform.rotation * Quaternion.Euler(shotgunRotationOffset);
+                    Vector3 shotgunPosition = camTransform.position + camTransform.TransformDirection(positionOffset);
+                    Quaternion shotgunRotation = camTransform.rotation * Quaternion.Euler(rotationOffset);
                     Instantiate(shotgun, shotgunPosition, shotgunRotation, camTransform);
+                    */
+                    //weapon.SetActive(true);
                     gameObject.SetActive(false);
                 }
                 break;

@@ -9,7 +9,7 @@ using Random = System.Random;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject pauseMenu; //set pause menu
+//    public GameObject pauseMenu; //set pause menu
     private bool isPaused;
 
     CharacterController charCtrl; //set character controller of player
@@ -27,13 +27,10 @@ public class PlayerController : MonoBehaviour
     public float sensitivity = 2.0f; //set sensitivity of camera turning
     public float lookXLim = 45.0f; //set degree limit of camera turning
     public float fov = 75.0f; //set field of view
+    public int adsRate; //time to ADS
 
-    public int ammoCount = 0; //hold # of ammo in inv
-    private bool canFire = true; //if player can fire weapon
-    public float fireRate; //hold rate of fire in sec for weapon
-    public Text ammoText; //display # of ammo in inventory
-    public Text fireText; //appears when firing bullet
-    private Vector3 fireTextPos;
+    public GameObject currentWeapon;
+    public Dictionary<string, Dictionary<string, int>> ammo = new Dictionary<string, Dictionary<string, int>>();
 
     private System.Random rand;
 
@@ -51,10 +48,6 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         cam.fieldOfView = fov;
-
-        UpdateAmmo(0);
-        fireText.text = "";
-        fireTextPos = fireText.transform.position;
 
         rand = new Random();
     }
@@ -105,11 +98,12 @@ public class PlayerController : MonoBehaviour
                 transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensitivity, 0);
             }
 
-            // Constantly check if Player fired weapon
-            StartCoroutine(FireWeapon());
+            // Constantly check if Player fired or reloaded the weapon
+            StartCoroutine(currentWeapon.GetComponent<Weapon>().WeaponHandler());
 
             // Constantly check if Player is aiming down sights
             StartCoroutine(AimDownSights());
+
         }
 
         // Pause Menu
@@ -173,63 +167,26 @@ public class PlayerController : MonoBehaviour
         */
     }
 
-    // Update Ammo Count Text
-    public void UpdateAmmo(int num = -1)
-    {
-        ammoCount += num;
-        if (ammoCount > 100) ammoCount = 100;
-        ammoText.text = ammoCount.ToString() + " | 100";
-    }
-
-    // Fire one shot of ammo
-    IEnumerator FireWeapon()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (ammoCount > 0)
-            {
-                canFire = false;
-                UpdateAmmo();
-                //fireText.transform.position = new Vector3((float)rand.Next(-250, 250), (float)rand.Next(-100, 100), 0f);
-                fireText.text = "pew"; // available ammo to be shot has been fired
-                StartCoroutine(FireRateHandler());
-            }
-            else
-            {
-                //fireText.transform.position = fireTextPos;
-                fireText.text = "click"; // no available ammo to be shot
-            }
-            yield return new WaitForSeconds(1f); // leave effect on screen for 1 sec
-            fireText.text = "";
-        }
-    }
-
-    IEnumerator FireRateHandler()
-    {
-        float timeToFire = 1 / fireRate;
-        yield return new WaitForSeconds(timeToFire);
-        canFire = true;
-    }
-
     // ADS
     IEnumerator AimDownSights()
     {
         // while right-click is pressed down, zoom fov in
         if (Input.GetMouseButtonDown(1))
         {
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i <= adsRate; i++)
             {
                 cam.fieldOfView = fov - (fov * 0.05f * i); //float affects dist
-                yield return new WaitForSeconds(1 / 10);
+                yield return new WaitForSeconds(1 / adsRate);
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
-            for (int i = 10; i > 0; i--)
+            for (int i = adsRate; i > 0; i--)
             {
                 cam.fieldOfView = fov - (fov * 0.05f * i);
-                yield return new WaitForSeconds(1 / 10);
+                yield return new WaitForSeconds(1 / adsRate);
             }
         }
     }
+
 }

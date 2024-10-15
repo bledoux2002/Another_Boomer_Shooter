@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     public float lookXLim = 45.0f; //set degree limit of camera turning
     public float fov = 75.0f; //set field of view
     public int adsRate; //time to ADS
+    public float interactDistance;
+    public LayerMask interactLayer;
+
+
 
     public GameObject currentWeapon;
     public Dictionary<string, Dictionary<string, int>> ammo = new Dictionary<string, Dictionary<string, int>>();
@@ -122,49 +126,25 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = isPaused;
         }
 
-        // Old player controller scripting, before adding Character Controller Component. Can be removed but keeping temporarily to study for future reference
-        /*        // Move Player
-                float moveX = Input.GetAxisRaw("Horizontal");
-                float moveZ = Input.GetAxisRaw("Vertical");
-                //        float moveY = rb.velocity.y;
-                rb.AddForce(Physics.gravity * (gravScale - 1) * rb.mass);
-
-                // Check if player on ground, if so allow for jump, else they fall down
-                if (Physics.Raycast(transform.position, Vector3.down, distCheck))
+        // Interact
+        //raycast to see if player is interacting with environment (door, button, etc)
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance, interactLayer))
+            {
+                GameObject obj = hit.transform.gameObject;
+                switch (obj.tag)
                 {
-                    isGrounded = true;
-                    rb.drag = 1;
-                } else {
-                    isGrounded = false;
-                    rb.drag = 0;
+                    case "door":
+                        StartCoroutine(obj.GetComponent<Door>().Open());
+                        break;
+                    case "button":
+                        break;
                 }
-                if (isGrounded && Input.GetKey("space"))
-                {
-                    //            moveY = jumpForce;
-                    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                } /* else {
-                    moveY = -0.375f;
-                } * 
-                Vector3 movement = new Vector3(moveX, 0.0f, moveZ) * speed;
-                rb.AddForce(transform.TransformDirection(movement));
+            }
 
-                // Rotate Player
-                if ((-90 <= rotateX) && (rotateX <= 90))
-                {
-                    rotateX = rotateX - (sensitivity * Input.GetAxis("Mouse Y"));
-                } else if (rotateX < -90)
-                {
-                    rotateX = -90;
-                } else if (rotateX > 90)
-                {
-                    rotateX = 90;
-                }
-                rotateY = rotateY + (sensitivity * Input.GetAxis("Mouse X"));
-                Vector3 camRotation = new Vector3(rotateX, rotateY, 0);
-                cam.transform.eulerAngles = camRotation;
-                Vector3 rotation = new Vector3(0, rotateY, 0);
-                transform.eulerAngles = rotation;
-        */
+
+        }
     }
 
     // ADS
@@ -173,6 +153,7 @@ public class PlayerController : MonoBehaviour
         // while right-click is pressed down, zoom fov in
         if (Input.GetMouseButtonDown(1))
         {
+            Debug.Log("ADS");
             for (int i = 1; i <= adsRate; i++)
             {
                 cam.fieldOfView = fov - (fov * 0.05f * i); //float affects dist

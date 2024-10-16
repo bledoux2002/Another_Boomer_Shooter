@@ -2256,7 +2256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a3c898b36978644b5b095aa5b2b417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorOpenTime: 1
+  doorOpenSpeed: 24
+  doorOpenTime: 5
 --- !u!1 &1245489823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,7 +2467,7 @@ MonoBehaviour:
   lookXLim: 90
   fov: 75
   adsRate: 10
-  interactDistance: 1
+  interactDistance: 2
   interactLayer:
     serializedVersion: 2
     m_Bits: 128

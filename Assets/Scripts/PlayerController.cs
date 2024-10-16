@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
                 switch (obj.tag)
                 {
                     case "door":
-                        StartCoroutine(obj.GetComponent<Door>().Open());
+                        StartCoroutine(obj.GetComponent<Door>().Operate());
                         break;
                     case "button":
                         break;

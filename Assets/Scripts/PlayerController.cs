@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         //raycast to see if player is interacting with environment (door, button, etc)
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance, interactLayer))
+            if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance, interactLayer))
             {
                 GameObject obj = hit.transform.gameObject;
                 switch (obj.tag)
@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour
                         StartCoroutine(obj.GetComponent<Door>().Operate());
                         break;
                     case "button":
+                        obj.GetComponent<Button>().Press();
                         break;
                 }
             }

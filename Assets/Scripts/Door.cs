@@ -8,6 +8,11 @@ public class Door : MonoBehaviour
     public int doorOpenTime;
     private bool doorOpen = false;
 
+    [SerializeField]
+    private GameObject top;
+    [SerializeField]
+    private GameObject bot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +33,8 @@ public class Door : MonoBehaviour
             doorOpen = true;
             for (int i = 0; i < doorOpenSpeed; i++)
             {
-                transform.Translate(Vector3.up * 3.5f / doorOpenSpeed);
+                top.transform.Translate(Vector3.up * 2.5f / doorOpenSpeed);
+                bot.transform.Translate(Vector3.down * 0.99f /  doorOpenSpeed);
                 yield return new WaitForSeconds(1 / 2 * doorOpenSpeed);
             }
 
@@ -37,7 +43,8 @@ public class Door : MonoBehaviour
             Debug.Log("Door closing...");
             for (int i = 0; i < doorOpenSpeed; i++)
             {
-                transform.Translate(Vector3.down * 3.5f / doorOpenSpeed);
+                top.transform.Translate(Vector3.down * 2.5f / doorOpenSpeed);
+                bot.transform.Translate(Vector3.up * 0.99f / doorOpenSpeed);
                 yield return new WaitForSeconds(1 / 2 * doorOpenSpeed);
             }
             doorOpen = false;

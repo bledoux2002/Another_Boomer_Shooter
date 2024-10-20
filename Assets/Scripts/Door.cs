@@ -33,7 +33,7 @@ public class Door : MonoBehaviour
             doorOpen = true;
             for (int i = 0; i < doorOpenSpeed; i++)
             {
-                top.transform.Translate(Vector3.up * 2.5f / doorOpenSpeed);
+                top.transform.Translate(Vector3.up * 2.49f / doorOpenSpeed);
                 bot.transform.Translate(Vector3.down * 0.99f /  doorOpenSpeed);
                 yield return new WaitForSeconds(1 / 2 * doorOpenSpeed);
             }
@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
             Debug.Log("Door closing...");
             for (int i = 0; i < doorOpenSpeed; i++)
             {
-                top.transform.Translate(Vector3.down * 2.5f / doorOpenSpeed);
+                top.transform.Translate(Vector3.down * 2.49f / doorOpenSpeed);
                 bot.transform.Translate(Vector3.up * 0.99f / doorOpenSpeed);
                 yield return new WaitForSeconds(1 / 2 * doorOpenSpeed);
             }

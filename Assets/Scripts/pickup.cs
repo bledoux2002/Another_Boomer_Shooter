@@ -25,8 +25,8 @@ public class Pickup : MonoBehaviour
 
     }
 
-    // Event Trigger, should prob move to scripts for each of these objects
-    void OnTriggerEnter(Collider playerCollider)
+    // Event Trigger
+    public void HandlePickup()
     {
         switch (gameObject.tag)
         {

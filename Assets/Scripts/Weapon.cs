@@ -78,8 +78,8 @@ public class Weapon : MonoBehaviour
             }
             else
             {
+                ammoInv -= magSize - ammoCount;
                 ammoCount = magSize;
-                ammoInv -= magSize;
             }
             UpdateAmmo(0);
             yield return new WaitForSeconds(0f);

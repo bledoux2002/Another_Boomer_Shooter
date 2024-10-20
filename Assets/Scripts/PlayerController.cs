@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     public Camera cam; //set cam
     public float sensitivity = 2.0f; //set sensitivity of camera turning
     public float lookXLim = 45.0f; //set degree limit of camera turning
-    public float fov = 75.0f; //set field of view
+    public float fov; //set field of view
+    public float ads; //set ads field of view
     public int adsRate; //time to ADS
     public float interactDistance;
     public LayerMask interactLayer;
@@ -148,6 +149,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        GameObject obj = other.gameObject;
+        if (obj.GetComponent<Pickup>() != null)
+        {
+            obj.GetComponent<Pickup>().HandlePickup();
+        }
+    }
+
     // ADS
     IEnumerator AimDownSights()
     {
@@ -155,17 +165,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("ADS");
-            for (int i = 1; i <= adsRate; i++)
+            for (int i = 0; i < adsRate; i++)
             {
-                cam.fieldOfView = fov - (fov * 0.05f * i); //float affects dist
+                cam.fieldOfView -= (fov - ads) / adsRate; //float affects dist
                 yield return new WaitForSeconds(1 / adsRate);
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
-            for (int i = adsRate; i > 0; i--)
+            for (int i = 0; i < adsRate; i++)
             {
-                cam.fieldOfView = fov - (fov * 0.05f * i);
+                cam.fieldOfView += (fov - ads) / adsRate;
                 yield return new WaitForSeconds(1 / adsRate);
             }
         }

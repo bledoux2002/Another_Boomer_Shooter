@@ -1,6 +1,6 @@
 # DOOMOUT
 
-This project is a passion project and serves as game development and design practice. It is a DOOM (1993)/Quake (1996) clone set in the Fallout universe. Currently a work-in-progress, the bare bones of the game mechanics have been set up.
+Another boomer shooter made in Unity.
 
 
 ## Authors
@@ -14,5 +14,3 @@ To deploy this project, add the project to the Unity Hub and build/run from the 
 
 
 ## Sources
-
-- [Similar concept](https://www.youtube.com/@saurx1116) (I swear I had this idea before I saw these videos but they do serve as good references and proof of concept)

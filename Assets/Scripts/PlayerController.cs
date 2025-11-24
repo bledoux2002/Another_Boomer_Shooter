@@ -33,9 +33,11 @@ public class PlayerController : MonoBehaviour
     public LayerMask interactLayer;
 
 
-
-    public GameObject currentWeapon;
+    public GameObject[] weapons;
+    public int currentWeapon;
     public Dictionary<string, Dictionary<string, int>> ammo = new Dictionary<string, Dictionary<string, int>>();
+    public Dictionary<string, bool> unlocked = new Dictionary<string, bool>();
+    private float scrollSensitivity = 1.0f;
 
     private System.Random rand;
 
@@ -55,6 +57,23 @@ public class PlayerController : MonoBehaviour
         cam.fieldOfView = fov;
 
         rand = new Random();
+
+        unlocked["pistol"] = true;
+        unlocked["shotgun"] = false;
+
+        //ammo
+        ammo["pistol"] = new Dictionary<string, int>();
+        ammo["pistol"]["mag"] = 0;
+        ammo["pistol"]["magMax"] = 12;
+        ammo["pistol"]["inv"] = 0;
+        ammo["pistol"]["invMax"] = 100;
+        ammo["pistol"]["box"] = 36;
+        ammo["shotgun"] = new Dictionary<string, int>();
+        ammo["shotgun"]["mag"] = 0;
+        ammo["shotgun"]["magMax"] = 2;
+        ammo["shotgun"]["inv"] = 0;
+        ammo["shotgun"]["invMax"] = 50;
+        ammo["shotgun"]["box"] = 12;
     }
 
     // FixedUpdate is called at a fixed interval, independent of frame rate
@@ -103,11 +122,19 @@ public class PlayerController : MonoBehaviour
                 transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensitivity, 0);
             }
 
+            float scrollAmount = Input.mouseScrollDelta.y * scrollSensitivity;
+            if (scrollAmount > 0)
+            {
+                changeWeapon(1);
+            } else if (scrollAmount < 0) {
+                changeWeapon(-1);
+            }
+
             // Constantly check if Player fired or reloaded the weapon
-            StartCoroutine(currentWeapon.GetComponent<Weapon>().WeaponHandler());
+            // StartCoroutine(weapons[currentWeapon].GetComponent<Weapon>().WeaponHandler());
 
             // Constantly check if Player is aiming down sights
-            StartCoroutine(AimDownSights());
+            // StartCoroutine(AimDownSights());
 
         }
 
@@ -128,24 +155,15 @@ public class PlayerController : MonoBehaviour
         }
 
         // Interact
-        //raycast to see if player is interacting with environment (door, button, etc)
+        //raycast to see if player interacts with IInteractable (door, button, etc)
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance, interactLayer))
             {
-                GameObject obj = hit.transform.gameObject;
-                switch (obj.tag)
-                {
-                    case "door":
-                        StartCoroutine(obj.GetComponent<Door>().Operate());
-                        break;
-                    case "button":
-                        obj.GetComponent<Button>().Press();
-                        break;
-                }
+                MonoBehaviour target = hit.transform.gameObject.GetComponent<MonoBehaviour>();
+                var interactable = target as IInteractable;
+                StartCoroutine(interactable?.Interact());
             }
-
-
         }
     }
 
@@ -179,6 +197,11 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(1 / adsRate);
             }
         }
+    }
+
+    void changeWeapon(int dir)
+    {
+        currentWeapon += dir;
     }
 
 }

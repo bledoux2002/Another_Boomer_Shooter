@@ -5,9 +5,11 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public PlayerController playerController;
-    public Weapon weapon; //shotgun prefab for instantiation when picked up
+    public Weapon weapon; // prefab for instantiation when picked up
     public Vector3 positionOffset;// = new Vector3(0, 1.5f, 0.5f);
     public Vector3 rotation;// = new Vector3(-90, 0, 0);
+
+    private Dictionary<string, int> ammo;
 
     // Start is called before the first frame update
     void Start()
@@ -30,26 +32,34 @@ public class Pickup : MonoBehaviour
     {
         switch (gameObject.tag)
         {
-            case "ammo": // have to change depending on ammo type
-                if (weapon.ammoInv < weapon.maxAmmo)
+            case "ammo": // have to change depending on ammo type, swap ammo to player controller
+                ammo = playerController.ammo[weapon.name];
+                if (ammo["inv"] < ammo["invMax"])
                 {
-                    weapon.UpdateAmmo(20);
+                    weapon.UpdateAmmo(ammo["box"]);
                     gameObject.SetActive(false);
                 }
                 break;
             case "weapon":
-                if (weapon.ammoInv < weapon.maxAmmo)
+                ammo = playerController.ammo[weapon.name];
+                if (ammo["inv"] < ammo["invMax"])
                 {
-                    weapon.UpdateAmmo(10);
-                    /*
-                    Transform camTransform = playerController.cam.transform;
-                    Vector3 shotgunPosition = camTransform.position + camTransform.TransformDirection(positionOffset);
-                    Quaternion shotgunRotation = camTransform.rotation * Quaternion.Euler(rotationOffset);
-                    Instantiate(shotgun, shotgunPosition, shotgunRotation, camTransform);
-                    */
+                    weapon.UpdateAmmo(ammo["box"]);
+
+                    if (!playerController.unlocked[weapon.name])
+                    {
+                        playerController.weapons[playerController.currentWeapon].SetActive(false);
+                        playerController.unlocked[weapon.name] = true;
+                        weapon.gameObject.SetActive(true);
+                    }
+                    
                     //weapon.SetActive(true);
                     gameObject.SetActive(false);
                 }
+                break;
+            case "health": //100-200 only for smaller sources?
+                break;
+            case "armor": //same with health, not following doom/quake for uniqueness?
                 break;
         }
     }

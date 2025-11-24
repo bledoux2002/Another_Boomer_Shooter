@@ -1,53 +1,40 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IInteractable
 {
-    public float doorOpenSpeed;
-    public int doorOpenTime;
-    private bool doorOpen = false;
+    // Animation Controls
+    [SerializeField] private float openSpeed;
+    [SerializeField] private float closeDelay;
+    private bool _open = false;
 
-    [SerializeField]
-    private GameObject top;
-    [SerializeField]
-    private GameObject bot;
+    // GameObjects
+    [SerializeField] private GameObject top;
+    [SerializeField] private GameObject bot;
 
-    // Start is called before the first frame update
-    void Start()
+    public IEnumerator Interact()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public IEnumerator Operate()
-    {
-        if (!doorOpen)
+        if (!_open)
         {
-            Debug.Log("Door opening...");
-            doorOpen = true;
-            for (int i = 0; i < doorOpenSpeed; i++)
+            // Debug.Log("Door opening...");
+            _open = true;
+            for (int i = 0; i < 50; i++)
             {
-                top.transform.Translate(Vector3.up * 2.49f / doorOpenSpeed);
-                bot.transform.Translate(Vector3.down * 0.99f /  doorOpenSpeed);
-                yield return new WaitForSeconds(1 / 2 * doorOpenSpeed);
+                top.transform.Translate(Vector3.up * 2.49f / 50f);
+                bot.transform.Translate(Vector3.down * 0.99f /  50f);
+                yield return new WaitForSeconds(openSpeed / 50f);
             }
 
-            yield return new WaitForSeconds(doorOpenTime);
+            yield return new WaitForSeconds(closeDelay);
             
-            Debug.Log("Door closing...");
-            for (int i = 0; i < doorOpenSpeed; i++)
+            // Debug.Log("Door closing...");
+            for (int i = 0; i < 50; i++)
             {
-                top.transform.Translate(Vector3.down * 2.49f / doorOpenSpeed);
-                bot.transform.Translate(Vector3.up * 0.99f / doorOpenSpeed);
-                yield return new WaitForSeconds(1 / 2 * doorOpenSpeed);
+                top.transform.Translate(Vector3.down * 2.49f / 50f);
+                bot.transform.Translate(Vector3.up * 0.99f / 50f);
+                yield return new WaitForSeconds(openSpeed / 50f);
             }
-            doorOpen = false;
+            _open = false;
         }
     }
 }

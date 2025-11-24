@@ -33,7 +33,7 @@ public class Pickup : MonoBehaviour
         switch (gameObject.tag)
         {
             case "ammo": // have to change depending on ammo type, swap ammo to player controller
-                ammo = playerController.ammo[weapon.name];
+                ammo = playerController.ammo[weapon.type];
                 if (ammo["inv"] < ammo["invMax"])
                 {
                     weapon.UpdateAmmo(ammo["box"]);
@@ -41,15 +41,15 @@ public class Pickup : MonoBehaviour
                 }
                 break;
             case "weapon":
-                ammo = playerController.ammo[weapon.name];
+                ammo = playerController.ammo[weapon.type];
                 if (ammo["inv"] < ammo["invMax"])
                 {
                     weapon.UpdateAmmo(ammo["box"]);
 
-                    if (!playerController.unlocked[weapon.name])
+                    if (!playerController.unlocked[weapon.type])
                     {
                         playerController.weapons[playerController.currentWeapon].SetActive(false);
-                        playerController.unlocked[weapon.name] = true;
+                        playerController.unlocked[weapon.type] = true;
                         weapon.gameObject.SetActive(true);
                     }
                     

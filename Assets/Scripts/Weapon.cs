@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    public string name;
+    public string type;
     public int ammoCount = 0; //ammo in mag
     public int magSize; // mag size
     public int ammoInv; // ammo in inv

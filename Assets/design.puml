@@ -1,0 +1,89 @@
+﻿@startuml
+
+package ABS {
+
+    +class PlayerController {
+        -inventory Inventory
+        +input(): Input
+        +move(Input): void
+    }
+
+    +class Inventory {
+        -weapons: List<Weapon>
+        -ammo: Dict<string, Dict<string, int>>
+        -keys: List<Key>
+        -weaponsUnlocked: Dict<string, Boolean>
+        
+        +Add(Pickup): void
+        +UseAmmo(string ammo, int quantity): int
+        +HaveKey(string color): string
+    }
+    
+    +class Pickup {
+        #Rotate(): void
+        +HandlePickup(): int
+    }
+    
+    +class AmmoBox {
+        -caliber: string
+        -type: string
+        -count: int
+        -damage: int
+        
+        +GetCaliber(): string
+        +GetType(): string
+        +GetCount(): int
+        +GetDamage(): int
+    }
+    
+    +class Weapon {
+        -caliber: string
+        -ammoType: string
+        -magCount: int
+        -magSize: int
+        -plusOne: Boolean
+        -damageMod: float
+        -firerate: float
+        -reloadSpeed: float
+        -mods: Dict<string, float>
+        -canFire: Boolean
+        
+        +Fire(): void
+        +Reload(): int        
+    }
+    
+    +class Key {
+        -color: string
+        
+        +GetColor(): string
+    }
+    
+    +class Door  {
+        -locked: Boolean
+        -color: string
+        
+        +GetLocked(): boolean;
+        +GetColor(): string;
+        +Unlock(string color): void
+    }
+    note right of Door
+        Player will raycast on door to open,
+        it will check if locked, if so it
+        will get color, look for key, then
+        pass key into door to unlock.
+    end note
+    
+    PlayerController --> Inventory
+    
+    Inventory --> AmmoBox
+    Inventory --> Weapon
+    Inventory --> Key
+    
+    Pickup <|-- AmmoBox
+    Pickup <|-- Weapon
+    Pickup <|-- Key
+
+
+}
+
+@enduml

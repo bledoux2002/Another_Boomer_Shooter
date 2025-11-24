@@ -9,12 +9,11 @@ using Random = System.Random;
 
 public class PlayerController : MonoBehaviour
 {
-//    public GameObject pauseMenu; //set pause menu
-    private bool isPaused;
+    public bool Paused { get; set; }
 
     CharacterController charCtrl; //set character controller of player
-    Vector3 moveDir = Vector3.zero; //???
-    float rotationX = 0; //???
+    Vector3 moveDir = Vector3.zero; //??
+    float rotationX = 0; //??
 
     public float walkSpeed = 7.0f; //determine speed of normal movement
     public float sprintSpeed = 10.0f; //determine speed of sprinting
@@ -43,11 +42,9 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        isPaused = GameObject.FindWithTag("canvas").GetComponent<PauseMenu>().GamePaused;
         charCtrl = GetComponent<CharacterController>();
 
         // hide cursor
@@ -79,8 +76,7 @@ public class PlayerController : MonoBehaviour
     // FixedUpdate is called at a fixed interval, independent of frame rate
     void Update()
     {
-        isPaused = GameObject.FindWithTag("canvas").GetComponent<PauseMenu>().GamePaused;
-        if (!isPaused)
+        if (!Paused)
         {
             // ???
             Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -140,19 +136,7 @@ public class PlayerController : MonoBehaviour
 
         // Pause Menu
         //possibly a way to store current movement values/velocity to reapply after pause? prevents player form dropping open resume
-        if (Input.GetKeyDown(KeyCode.Escape)) //change to 'escape', doesn't work in editor
-        {
-            isPaused = !isPaused;
-            if (isPaused)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            Cursor.visible = isPaused;
-        }
+
 
         // Interact
         //raycast to see if player interacts with IInteractable (door, button, etc)
@@ -204,4 +188,9 @@ public class PlayerController : MonoBehaviour
         currentWeapon += dir;
     }
 
+
+    public void Freeze(bool gamePaused)
+    {
+        Paused = gamePaused;
+    }
 }

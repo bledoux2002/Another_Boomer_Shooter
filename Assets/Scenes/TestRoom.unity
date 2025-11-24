@@ -699,7 +699,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -729,6 +729,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461009362}
   m_CullTransparentMesh: 1
+--- !u!1001 &472745235
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7569467197940052944, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.51832
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.39913
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996894888404519856, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
 --- !u!1 &474169071
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,16 +1004,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066076999}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
-        m_Mode: 1
+      - m_Target: {fileID: 1282233481236342740, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &690557138
@@ -1119,6 +1176,7 @@ GameObject:
   - component: {fileID: 943129567}
   - component: {fileID: 943129566}
   - component: {fileID: 943129565}
+  - component: {fileID: 943129568}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -1190,8 +1248,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066076999}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 1282233481236342740, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -1240,6 +1298,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943129563}
   m_CullTransparentMesh: 1
+--- !u!114 &943129568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943129563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c9c165b755c204a8fd07472afbfea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResumeButton
+  resumeButton: {fileID: 943129565}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1511,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1677,7 +1748,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -2268,8 +2339,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066076999}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 1282233481236342740, guid: a61c85b0e2aec5d4a85491ce53a0654e, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -2560,7 +2631,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 136cd437bbe873e4e95fb80b6913d20e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2657,7 +2728,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: edc5438cfd81c4d4980c01cfccf2545d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3124,7 +3195,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 549e2da2f2d133140bbf0eed4191dbdc, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3245,7 +3316,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 549e2da2f2d133140bbf0eed4191dbdc, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3342,7 +3413,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: bedefa60b9e6b7940b3a14fb8b247dff, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3439,7 +3510,6 @@ GameObject:
   - component: {fileID: 2066076997}
   - component: {fileID: 2066076996}
   - component: {fileID: 2066076995}
-  - component: {fileID: 2066076999}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: canvas
@@ -3534,26 +3604,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2066076999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066076994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cef82d77eda5bf647bce6018541349e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GamePaused: 0
-  PauseMenuUI:
-  - {fileID: 1065469954}
-  - {fileID: 776821400}
-  - {fileID: 368618347}
-  - {fileID: 1622129075}
-  - {fileID: 1770793188}
-  menuScene: MainMenu
 --- !u!1001 &2115951378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3869,6 +3919,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 472745235}
   - {fileID: 1363494009}
   - {fileID: 576723537}
   - {fileID: 6497880496513464602}

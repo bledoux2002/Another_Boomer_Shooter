@@ -6,7 +6,7 @@ public class PauseMenuButton : MonoBehaviour
 
     void Start()
     {
-        if (resumeButton != null) ;
-        resumeButton.onClick.AddListener(() => GameManager.Instance.Resume());
+        if (resumeButton != null)
+            resumeButton.onClick.AddListener(() => GameManager.Instance.Resume());
     }
 }

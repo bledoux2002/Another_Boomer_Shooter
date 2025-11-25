@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour
+public abstract class Pickup<TType, TReturn> : MonoBehaviour
 {
     public PlayerController playerController;
     public Weapon weapon; // prefab for instantiation when picked up
@@ -11,24 +11,37 @@ public class Pickup : MonoBehaviour
 
     private Dictionary<string, int> ammo;
 
-    // Start is called before the first frame update
+    public TType Type { get; protected set; }
+    protected float startHeight;
+
     void Start()
     {
-        
+        startHeight = transform.position.y;
+        OnStart();
     }
 
+    protected virtual void OnStart() {}
+    
     // Update is called once per frame
     void Update()
+    {
+        Hover();
+        OnUpdate();
+    }
+
+    protected virtual void OnUpdate() {}
+
+    protected void Hover()
     {
         // Continuously rotate object
         transform.Rotate(rotation * Time.deltaTime);
         
         // Object floats up and down
-
+        transform.position = new Vector3(transform.position.x, startHeight + Mathf.Sin(Time.time));
     }
 
     // Event Trigger
-    public void HandlePickup()
+    public abstract TReturn HandlePickup();
     {
         switch (gameObject.tag)
         {
@@ -39,6 +52,7 @@ public class Pickup : MonoBehaviour
                     weapon.UpdateAmmo(ammo["box"]);
                     gameObject.SetActive(false);
                 }
+
                 break;
             case "weapon":
                 ammo = playerController.ammo[weapon.type];
@@ -52,10 +66,11 @@ public class Pickup : MonoBehaviour
                         playerController.unlocked[weapon.type] = true;
                         weapon.gameObject.SetActive(true);
                     }
-                    
+
                     //weapon.SetActive(true);
                     gameObject.SetActive(false);
                 }
+
                 break;
             case "health": //100-200 only for smaller sources?
                 break;

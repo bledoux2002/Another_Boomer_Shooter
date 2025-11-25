@@ -20,13 +20,13 @@ package ABS {
     }
     
     +class Pickup {
+        #type: string
         #Rotate(): void
         +HandlePickup(): int
     }
     
     +class AmmoBox {
         -caliber: string
-        -type: string
         -count: int
         -damage: int
         
@@ -52,6 +52,14 @@ package ABS {
         +Reload(): int        
     }
     
+    +class Health {
+        -amount: int
+    }
+    
+    +class Armor {
+        -amount: int
+    }
+    
     +class Key {
         -color: string
         
@@ -74,6 +82,8 @@ package ABS {
     end note
     
     PlayerController --> Inventory
+    PlayerController --> Health
+    PlayerController --> Armor
     
     Inventory --> AmmoBox
     Inventory --> Weapon
@@ -81,6 +91,8 @@ package ABS {
     
     Pickup <|-- AmmoBox
     Pickup <|-- Weapon
+    Pickup <|-- Health
+    Pickup <|-- Armor
     Pickup <|-- Key
 
 

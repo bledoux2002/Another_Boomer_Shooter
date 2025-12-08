@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Pickup<TType, TReturn> : MonoBehaviour
+public abstract class Pickup : MonoBehaviour
 {
     public PlayerController playerController;
     public Weapon weapon; // prefab for instantiation when picked up
     public Vector3 positionOffset;// = new Vector3(0, 1.5f, 0.5f);
     public Vector3 rotation;// = new Vector3(-90, 0, 0);
 
-    private Dictionary<string, int> ammo;
+    // private Dictionary<string, int> ammo;
 
-    public TType Type { get; protected set; }
     protected float startHeight;
 
     void Start()
@@ -40,8 +39,7 @@ public abstract class Pickup<TType, TReturn> : MonoBehaviour
         transform.position = new Vector3(transform.position.x, startHeight + Mathf.Sin(Time.time));
     }
 
-    // Event Trigger
-    public abstract TReturn HandlePickup();
+    /*
     {
         switch (gameObject.tag)
         {
@@ -78,4 +76,5 @@ public abstract class Pickup<TType, TReturn> : MonoBehaviour
                 break;
         }
     }
+    */
 }

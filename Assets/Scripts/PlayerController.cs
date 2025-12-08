@@ -144,19 +144,32 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance, interactLayer))
             {
-                MonoBehaviour target = hit.transform.gameObject.GetComponent<MonoBehaviour>();
-                var interactable = target as IInteractable;
-                StartCoroutine(interactable?.Interact());
+                IInteractable target = hit.transform.gameObject.GetComponent<IInteractable>();
+                target.Interact();
             }
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        GameObject obj = other.gameObject;
-        if (obj.GetComponent<Pickup>() != null)
+        Pickup pickup = other.gameObject.GetComponent<Pickup>();
+
+        switch (pickup)
         {
-            obj.GetComponent<Pickup>().HandlePickup();
+            case Health healthPack:
+                break;
+
+            case Armor armorPack:
+                break;
+
+            case AmmoBox ammoBox:
+                break;
+            
+            case Key key:
+                break;
+            
+            case Weapon weapon:
+                break;
         }
     }
 

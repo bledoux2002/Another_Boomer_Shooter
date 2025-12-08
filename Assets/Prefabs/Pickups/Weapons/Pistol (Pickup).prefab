@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6037760854819154747, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
       propertyPath: m_Name
-      value: Pistol (Pickup) 1
+      value: Pistol (Pickup)
       objectReference: {fileID: 0}
     - target: {fileID: 6037760854819154747, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
       propertyPath: m_Layer
@@ -70,46 +70,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6037760854819154747, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5115130761559293877}
-    - targetCorrespondingSourceObject: {fileID: 6037760854819154747, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -8654325857846145753}
     - targetCorrespondingSourceObject: {fileID: 6037760854819154747, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -772338509540034746}
+      addedObject: {fileID: 7448782865032851748}
   m_SourcePrefab: {fileID: 100100000, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
 --- !u!1 &1335337400761156003 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6037760854819154747, guid: d763ef4ba8e36944bb37c4b75b80144d, type: 3}
   m_PrefabInstance: {fileID: 4702459261255985816}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &5115130761559293877
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335337400761156003}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!65 &-8654325857846145753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -129,9 +99,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.25, y: 0.5, z: 1.25}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-772338509540034746
+--- !u!114 &7448782865032851748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,10 +110,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335337400761156003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c6c6359380ff245a1e3605d166e2f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c9437c0eea10c7478a09daeccec9065, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
   playerController: {fileID: 0}
   weapon: {fileID: 0}
   positionOffset: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 45, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
+  equipSound: {fileID: 0}
+  fireSound: {fileID: 0}
+  reloadSound: {fileID: 0}

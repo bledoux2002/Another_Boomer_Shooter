@@ -12,7 +12,7 @@ public enum FireMode
     Automatic
 }
 
-public class Weapon : Pickup<int> // this is annoying, maybe have health/armor be an overridden subclass with two types and the rest can just be one type?
+public class Weapon : Pickup
 {
     public string Caliber { get; protected set; } // 12 gauge, 9mm, .45, .50, etc
     public string AmmoType { get; protected set; } // FMJ, HP, AP, etc
@@ -25,7 +25,7 @@ public class Weapon : Pickup<int> // this is annoying, maybe have health/armor b
     public float ReloadSpeed { get; protected set; } // how long reloading takes
     public Dictionary<string, float> Mods { get; protected set; } // which mods the weapon has and the damage modifier of each
     
-    private bool _canFire; //if player can fire weapon
+    // private bool _canFire; //if player can fire weapon
     
     [SerializeField]protected AudioSource equipSound;
     [SerializeField]protected AudioSource fireSound;
@@ -35,7 +35,7 @@ public class Weapon : Pickup<int> // this is annoying, maybe have health/armor b
     // Start is called before the first frame update
     protected override void OnStart()
     {
-        UpdateAmmo(0);
+        // UpdateAmmo(0);
     }
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class Weapon : Pickup<int> // this is annoying, maybe have health/armor b
     {
         
     }
-
+/*
     // Update Ammo Count Text
     public void UpdateAmmo(int num = -1)
     {
@@ -102,5 +102,5 @@ public class Weapon : Pickup<int> // this is annoying, maybe have health/armor b
         yield return new WaitForSeconds(1 / fireRate);
         _canFire = true;
     }
-
+*/
 }
